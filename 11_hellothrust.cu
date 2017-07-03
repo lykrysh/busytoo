@@ -1,4 +1,3 @@
-#include <iostream>
 #include <thrust/host_vector.h>
 #include <thrust/device_vector.h>
 #include <thrust/fill.h>
@@ -6,6 +5,7 @@
 #include <thrust/copy.h>
 #include <list>
 #include <vector>
+#include <iostream>
 
 using namespace std;
 
@@ -26,14 +26,12 @@ int main()
 	H.resize(N);
 	thrust::copy(D.begin(), D.end(), H.begin());
 
-	cout << "H is: ";
-	for(auto i = H.begin(); i != H.end(); ++i)
-		cout << *i << " ";
+	cout << "H: ";
+	thrust::copy(H.begin(), H.end(), ostream_iterator<int>(cout, " "));
 	cout << endl;
 
 	cout << "D is: ";
-	for(auto i = D.begin(); i != D.end(); ++i)
-		cout << *i << " ";
+	thrust::copy(D.begin(), D.end(), ostream_iterator<int>(cout, " "));
 	cout << endl;
 
 	// OK to use regular vector too
@@ -41,8 +39,7 @@ int main()
 	thrust::copy(D.begin(), D.end(), regular.begin());
 
 	cout << "Regular vec is: ";
-	for(auto i = regular.begin(); i != regular.end(); ++i)
-		cout << *i << " ";
+	thrust::copy(regular.begin(), regular.end(), ostream_iterator<int>(cout, " "));
 	cout << endl;
 
 	///////////////////////////////////////////////////////////////////
@@ -83,8 +80,7 @@ int main()
 	thrust::device_vector<int> DD(lst.begin(), lst.end());
 
 	cout << "DD is: ";
-	for(auto i = DD.begin(); i != DD.end(); ++i)
-		cout << *i << " ";
+	thrust::copy(DD.begin(), DD.end(), ostream_iterator<int>(cout, " "));
 	cout << endl;
 
 	return 0;
